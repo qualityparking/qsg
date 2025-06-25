@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
+import '../widgets/qr_scanner.dart';
 
 class ValidateScreen extends StatefulWidget {
   const ValidateScreen({super.key});
@@ -17,6 +18,20 @@ class _ValidateScreenState extends State<ValidateScreen> {
     setState(() => _result = result);
   }
 
+  void _openQRScanner() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => QRScannerScreen(
+          onScanned: (code) {
+            _platController.text = code;
+            _validate();
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +45,22 @@ class _ValidateScreenState extends State<ValidateScreen> {
               decoration: const InputDecoration(labelText: 'Plat Nomor'),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(onPressed: _validate, child: const Text('Cek')),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _validate,
+                    child: const Text('Cek'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.qr_code_scanner),
+                  label: const Text('Scan'),
+                  onPressed: _openQRScanner,
+                ),
+              ],
+            ),
             const SizedBox(height: 20),
             _result == null
                 ? const Text('Belum ada hasil')
