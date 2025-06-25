@@ -1,21 +1,12 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
-from routes.auth_routes import auth_bp
-from routes.parking_routes import parking_bp
-from config import Config
+from flask_cors import CORS
+from routes.payment_routes import payment_bp
 
 app = Flask(__name__)
-app.config.from_object(Config)
+CORS(app)
 
-db = SQLAlchemy(app)
-jwt = JWTManager(app)
-
-import models.user
-import models.parking
-
-app.register_blueprint(auth_bp, url_prefix='/api')
-app.register_blueprint(parking_bp, url_prefix='/api/parking')
+# Register route
+app.register_blueprint(payment_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)
