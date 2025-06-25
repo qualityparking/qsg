@@ -1,1 +1,15 @@
 
+{% extends "base.html" %}
+{% block content %}
+<h4>Kendaraan Keluar</h4>
+<form method="post">
+    <input type="text" name="plat" placeholder="Plat Nomor" required class="form-control mb-2">
+    <select name="metode" class="form-control mb-2" required>
+        <option value="">Pilih Metode Pembayaran</option>
+        <option value="Tunai">Tunai</option>
+        <option value="QRIS">QRIS</option>
+        <option value="E-Wallet">E-Wallet</option>
+    </select>
+    <button class="btn btn-success">Bayar & Keluar</button>
+</form>
+{% endblock %}
