@@ -38,7 +38,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         onPageFinished: (url) {
           if (url.contains('finish')) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Pembayaran selesai!'))
+              const SnackBar(content: Text('Pembayaran selesai!')),
             );
             Navigator.pop(context);
           }
